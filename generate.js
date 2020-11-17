@@ -1,7 +1,7 @@
 // node set login
 const path = require('path');
 
-// 创建步骤
+// 创建步骤1
 async function createCpt() {
     try {
         await exists();  // 检测文件夹

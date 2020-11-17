@@ -1,5 +1,5 @@
-// // node set login
-// const path = require('path');
+// node set login
+const path = require('path');
 //
 // // 创建文件夹
 // async function createCpt() {

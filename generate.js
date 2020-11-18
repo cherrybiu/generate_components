@@ -1,16 +1,40 @@
-// node set login
-const path = require('path');
+const fs = require('fs');
 
-// 创建步骤1
-async function createCpt() {
-    try {
-        await exists();  // 检测文件夹是否存在的方法
-        await readFile(); // 读取模版文件
-        await writeFile(await readFile());  // 写入组件
-    } catch (e) {
-        console.log(err);
-    }
+let basePath = 'src/components';
+const cptName = process.argv.splice(2)[0] // 创建的文件名
+let path = cptName.split('/');
+let fileName = path[path.length - 1];
+let readsFile = ['src/tmp/index.js','src/tmp/tmp.js']
+let writeFile = [`${fileName}.js`, `${fileName}.html`, `${fileName}.css`, 'index.js' ]
+
+// 检测是否存在文件夹
+const exists = function () {
+    return new Promise((res, reject) => {
+        (async function () {
+            for (let a of path) {
+                fs.existsSync(basePath + a) ? basePath = `${basePath}${a}/` : await mkdir(a)
+            }
+            res(basePath)
+        })()
+    })
 }
 
-// // 获取命令行参数
-// var args = process.argv;
+// 建立文件夹
+let mkdir = function(dir) {
+    return new Promise((res, rej) => {
+        fs.mkdir(basePath + dir, (err) => {
+            if (err) rej(err);
+            basePath = `${basePath}${dir}`
+            res(basePath)
+        })
+    })
+}
+
+// 读取模版文件内容， 并填充目标组件
+let readFile = function() {
+    return new Promise((res, rej) => {
+        for (let file of readsFile) {
+            let text = fs.readFileSync(file).toString();
+        }
+    })
+}

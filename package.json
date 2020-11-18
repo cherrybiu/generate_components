@@ -4,7 +4,7 @@
   "description": "使用node编写的生成模版组件的脚本",
   "main": "generate.js",
   "bin": {
-    "saa": "./bin/index.js"
+    "comp": "./bin/index.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

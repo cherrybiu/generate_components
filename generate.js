@@ -35,6 +35,25 @@ let readFile = function() {
     return new Promise((res, rej) => {
         for (let file of readsFile) {
             let text = fs.readFileSync(file).toString();
+            text = text.replace(/time/g, moment().format('YYYY/MM/DD'))
+                .replace(/temp/g, name).replace(/author/g, author)
+            file.push(text)
         }
+        res(file);
+    })
+}
+
+// 写入文件
+let writeFile = function(file) {
+    return new Promise((res, rej) => {
+        (async function () {
+            for (let a of writeFile) {
+                await fs.write(`${basePath}/${a}`,
+                    a == writeFile[3] ? file[0] : a == writeFile[0] ? file[1] : '', (err) => {
+                        if (err) rej(err)
+                    })
+            }
+            res('succ')
+        })()
     })
 }

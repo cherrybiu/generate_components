@@ -7,6 +7,7 @@
     "comp": "./bin/index.js"
   },
   "scripts": {
+    "create": "node ./create.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -21,6 +22,6 @@
   "homepage": "https://github.com/cherrybiu/generate_components#readme",
   "dependencies": {
     "moment": "^2.18.1",
-    "saa": "^1.0.0"
+    "chalk": "^4.1.0"
   }
 }

@@ -12,10 +12,14 @@ let files = []
 // 检测是否存在文件夹
 const checkFileExists = function () {
     return new Promise(async (res, reject) => {
-        for (let a of path) {
-            fs.existsSync(basePath + '/' + a) ? basePath = `${basePath}/${a}/` : await mkdir(a)
+        if (fs.existsSync(`${basePath}/${cptName}`)) {
+            reject(`已存在${fileName}`);
+        } else {
+            for (let a of path) {
+                fs.existsSync(basePath + '/' + a) ? basePath = `${basePath}/${a}/` : await mkdir(a)
+            }
+            res(basePath)
         }
-        res(basePath)
     })
 }
 
@@ -35,7 +39,7 @@ let readFile = function() {
     return new Promise((res, rej) => {
         for (let file of readsFile) {
             let text = fs.readFileSync(file).toString();
-            text = text.replace(/time/g, moment().format('YYYY-MM-DD'))
+            text = text.replace(/time/g, moment().format('YYYY/MM/DD'))
             files.push(text)
         }
         res(files);

@@ -13,7 +13,7 @@ let files = []
 const checkFileExists = function () {
     return new Promise(async (res, reject) => {
         if (fs.existsSync(`${basePath}/${cptName}`)) {
-            reject(`已存在${fileName}文件`);
+            reject(`已存在${fileName}文件了`);
         } else {
             for (let a of path) {
                 fs.existsSync(basePath + '/' + a) ? basePath = `${basePath}/${a}/` : await mkdir(a)

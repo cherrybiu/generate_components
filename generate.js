@@ -11,13 +11,11 @@ let files = []
 
 // 检测是否存在文件夹
 const checkFileExists = function () {
-    return new Promise((res, reject) => {
-        (async function () {
-            for (let a of path) {
-                fs.existsSync(basePath + '/' + a) ? basePath = `${basePath}/${a}/` : await mkdir(a)
-            }
-            res(basePath)
-        })()
+    return new Promise(async (res, reject) => {
+        for (let a of path) {
+            fs.existsSync(basePath + '/' + a) ? basePath = `${basePath}/${a}/` : await mkdir(a)
+        }
+        res(basePath)
     })
 }
 
@@ -46,16 +44,14 @@ let readFile = function() {
 
 // 写入文件
 let writeToFile = function(file) {
-    return new Promise((res, rej) => {
-        (async function () {
-            for (let a of writeFiles) {
-                await fs.writeFile(`${basePath}/${a}`,
-                    a === writeFiles[3] ? file[0] : a === writeFiles[0] ? file[1] : '', (err) => {
-                        if (err) rej(err)
-                    })
-            }
-            res('success')
-        })()
+    return new Promise(async (res, rej) => {
+        for (let a of writeFiles) {
+            await fs.writeFile(`${basePath}/${a}`,
+                a === writeFiles[3] ? file[0] : a === writeFiles[0] ? file[1] : '', (err) => {
+                    if (err) rej(err)
+                })
+        }
+        res('success')
     })
 }
 

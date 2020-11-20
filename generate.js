@@ -2,7 +2,7 @@ const fs = require('fs');
 const moment = require('moment')
 
 let basePath = 'src/components';
-const cptName = process.argv.splice(2)[0] // 创建的文件名
+const cptName = process.argv.splice(2)[0] // 从命令行获取文件名参数
 let path = cptName.split('/');
 let fileName = path[path.length - 1];
 let readsFile = ['src/tmp/index.js','src/tmp/tmp.js']
@@ -37,8 +37,7 @@ let readFile = function() {
     return new Promise((res, rej) => {
         for (let file of readsFile) {
             let text = fs.readFileSync(file).toString();
-            text = text.replace(/time/g, moment().format('YYYY/MM/DD'))
-                .replace(/temp/g, fileName)
+            text = text.replace(/time/g, moment().format('YYYY-MM-DD'))
             files.push(text)
         }
         res(files);

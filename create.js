@@ -20,12 +20,12 @@ const generateFile = (path, data) => {
     }
 
     return new Promise((res, rej) => {
-        fs.writeFile(path, data, (err) => {
+        fs.writeFile(path, data, 'utf8', err => {
             if (err) {
                 errorLog(err.message)
                 rej(err)
             } else {
-                resolve('')
+                res(true)
             }
         })
     })
@@ -37,7 +37,7 @@ process.stdin.on('data', async function (chunk){
     // 组件名称
     const inputName = String(chunk).trim().toString()
     // Vue页面组件路径
-    const componentPath = resolve('../../src/views', inputName)
+    const componentPath = resolve('./src/views', inputName)
     // vue文件
     const vueFile = resolve(componentPath, 'main.vue')
     // 入口文件

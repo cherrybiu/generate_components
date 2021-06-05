@@ -78,18 +78,18 @@ process.stdin.on('end', () => {
 
 function dotExistDirectoryCreate(directory) {
     return new Promise((resolve) => {
-        mkdirs(directory, function () {
+        mkdir(directory, function () {
             resolve(true)
         })
     })
 }
 
-function mkdirs(directory, callback) {
+function mkdir(directory, callback) {
     var exists = fs.existsSync(directory)
     if (exists) {
         callback()
     } else {
-        mkdirs(path.dirname(directory), function () {
+        mkdir(path.dirname(directory), function () {
             fs.mkdirSync(directory)
             callback()
         })
